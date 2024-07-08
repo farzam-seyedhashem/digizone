@@ -1,0 +1,564 @@
+/*
+Material Design Version 3
+Badge Classes
+*/
+/*small badge*/
+.small-badge {
+    @apply rounded-full bg-error-light dark:bg-error-dark w-[6px] h-[6px];
+}
+
+/*large badge*/
+.large-badge {
+    @apply font-medium flex items-center justify-center text-label-small rounded-full text-on-error-light dark:text-on-error-dark bg-error-light dark:bg-error-dark w-[16px] h-[16px];
+
+}
+
+/*large max badge*/
+.large-max-badge {
+    @apply font-medium flex items-center justify-center text-label-small rounded-full text-on-error-light dark:text-on-error-dark bg-error-light dark:bg-error-dark px-[4px];
+
+}
+
+/*------------------------------------------*/
+
+/*
+Material Design Version 3
+Bottom App Bars Classes
+ */
+.bottom-app-bar-container {
+    @apply pr-4 flex items-center pl-1 py-3 h-[80px] bg-surface-container-light dark:bg-surface-container-dark w-full
+}
+
+.bottom-app-bar-container .link-container {
+    @apply flex flex-grow space-x-2
+}
+
+/*------------------------------------------*/
+
+/*
+Material Design Version 3
+Button Classes
+ */
+.button {
+    @apply overflow-hidden rounded-full h-[40px] text-label-large font-medium;
+}
+
+.button-state-layer {
+    @apply w-full h-full flex items-center justify-center
+}
+
+.button-with-icon .button-state-layer {
+    @apply pl-4 pr-6 h-[40px]
+}
+
+.button-without-icon .button-state-layer {
+    @apply px-6 h-[40px]
+}
+
+.button-with-icon .icon {
+    @apply mr-2
+}
+
+.button-state-layer {
+    @apply flex items-center justify-center
+}
+
+.filled-button {
+    @apply bg-primary-light dark:bg-primary-dark text-on-primary-light dark:text-on-primary-dark
+}
+
+.filled-button .button-state-layer {
+    @apply hover:bg-on-primary-light/[8%] dark:hover:bg-on-primary-dark/[8%] focus:bg-on-primary-light/[8%] dark:focus:bg-on-primary-dark/[8%] active:bg-on-primary-light/[8%] dark:active:bg-on-primary-dark/[8%]
+}
+
+.outlined-button {
+    @apply border border-outline-light dark:border-outline-dark text-primary-light dark:text-primary-dark
+}
+
+.outlined-button .button-state-layer {
+    @apply hover:bg-primary-light/[8%] dark:hover:bg-primary-dark/[8%] focus:bg-primary-light/[12%] dark:focus:bg-primary-dark/[12%] active:bg-primary-light/[12%] dark:active:bg-primary-dark/[12%]
+}
+
+.text-button {
+    @apply text-primary-light dark:text-primary-dark
+}
+
+.text-button .button-state-layer {
+    @apply hover:bg-primary-light/[8%] dark:hover:bg-primary-dark/[8%] focus:bg-primary-light/[12%] dark:focus:bg-primary-dark/[12%] active:bg-primary-light/[12%] dark:active:bg-primary-dark/[12%]
+}
+
+.elevated-button {
+    @apply active:shadow-elevated-one-light dark:active:shadow-elevated-one-dark focus:shadow-elevated-one-light dark:focus:shadow-elevated-one-dark shadow-elevated-one-light dark:shadow-elevated-one-dark hover:shadow-elevated-two-light dark:hover:shadow-elevated-two-dark bg-surface-container-low-light dark:bg-surface-container-low-dark text-primary-light dark:text-primary-dark
+}
+
+.elevated-button .button-state-layer {
+    @apply hover:bg-primary-light/[8%] dark:hover:bg-primary-dark/[8%] focus:bg-primary-light/[12%] dark:focus:bg-primary-dark/[12%] active:bg-primary-light/[12%] dark:active:bg-primary-dark/[12%]
+}
+
+.tonal-button {
+    @apply bg-secondary-container-light dark:bg-secondary-container-dark text-on-secondary-container-light dark:text-on-secondary-container-dark
+}
+
+.tonal-button .button-state-layer {
+    @apply hover:bg-on-secondary-container-light/[8%] dark:hover:bg-on-secondary-container-dark/[8%] focus:bg-on-secondary-container-light/[12%] dark:focus:bg-on-secondary-container-dark/[12%] active:bg-on-secondary-container-light/[12%] dark:active:bg-on-secondary-container-dark/[12%]
+}
+
+/*------------------------------------------*/
+
+/*
+Material Design Version 3
+Assets Icon Classes
+ */
+
+/*------------------------------------------*/
+
+/*
+Material Design Version 3
+FAB & Extended FAB Button Classes
+ */
+
+/*fab global style*/
+.fab-container {
+    @apply block overflow-hidden
+}
+
+.fab-container .fab-icon {
+    @apply w-6 h-6
+}
+
+.fab-container .fab-text {
+    @apply text-label-large ml-3
+}
+
+.fab-state-layer {
+    @apply flex items-center w-full h-full justify-center;
+}
+
+/*fab style in different sizes*/
+.fab-small {
+    @apply rounded-[12px]
+}
+
+.fab-small .fab-state-layer {
+    @apply p-[8px]
+}
+
+.fab-normal {
+    @apply rounded-[16px]
+}
+
+.fab-normal .fab-state-layer {
+    @apply p-[16px]
+}
+
+.fab-large {
+    @apply rounded-[28px]
+}
+
+.fab-large .fab-state-layer {
+    @apply p-[30px]
+}
+
+/*extended fab size style*/
+.ex-fab {
+    @apply rounded-[16px]
+}
+
+.ex-fab .fab-state-layer {
+    @apply rounded-[16px] py-[16px] pr-[20px] pl-[16px]
+}
+
+/*fab style in different colors*/
+/*primary color*/
+.fab-primary {
+    @apply bg-primary-container-light dark:bg-primary-container-dark text-on-primary-container-light dark:text-on-primary-container-dark
+}
+
+.fab-primary .fab-state-layer {
+    @apply hover:bg-on-primary-container-light/[8%] dark:hover:bg-on-primary-container-dark/[8%] active:bg-on-primary-container-light/[12%] dark:active:bg-on-primary-container-dark/[12%] focus:bg-on-primary-container-light/[12%] dark:focus:bg-on-primary-container-dark/[12%]
+}
+
+/*surface color*/
+.fab-surface {
+    @apply overflow-hidden bg-surface-container-high-light dark:bg-surface-container-high-dark text-primary-light dark:text-primary-dark;
+}
+
+.fab-surface .fab-state-layer {
+    @apply bg-transparent hover:bg-primary-light/[8%] dark:hover:bg-primary-dark/[8%] active:bg-primary-light/[12%] dark:active:bg-primary-dark/[12%] focus:bg-primary-light/[12%] dark:focus:bg-primary-dark/[12%];
+}
+
+/*secondary color*/
+.fab-secondary {
+    @apply bg-secondary-container-light dark:bg-secondary-container-dark text-on-secondary-container-light dark:text-on-secondary-container-dark;
+}
+
+.fab-secondary .fab-state-layer {
+    @apply hover:bg-on-secondary-container-light/[8%] dark:hover:bg-on-secondary-container-dark/[8%] active:bg-on-secondary-container-light/[12%] dark:active:bg-on-secondary-container-dark/[12%] focus:bg-on-secondary-container-light/[12%] dark:focus:bg-on-secondary-container-dark/[12%];
+}
+
+/*Tertiary color*/
+.fab-tertiary {
+    @apply bg-tertiary-container-light dark:bg-tertiary-container-dark text-on-tertiary-container-light dark:text-on-tertiary-container-dark
+
+}
+
+.fab-tertiary .fab-state-layer {
+    @apply hover:bg-on-tertiary-container-light/[8%] dark:hover:bg-on-tertiary-container-dark/[8%] active:bg-on-tertiary-container-light/[12%] dark:active:bg-on-tertiary-container-dark/[12%] focus:bg-on-tertiary-container-light/[12%] dark:focus:bg-on-tertiary-container-dark/[12%]
+}
+
+/*------------------------------------------*/
+
+/*
+Material Design Version 3
+Icon Button Classes
+ */
+
+/*icon button global style*/
+.icon-button-container {
+    @apply h-[48px] w-[48px] flex items-center justify-center;
+}
+
+.icon-button {
+    @apply h-[40px] w-[40px] rounded-full justify-center flex items-center;
+}
+
+.icon-button-state-layer {
+    @apply w-full h-full flex items-center justify-center rounded-full
+}
+
+/*field icon button style*/
+.filled-icon-button {
+    @apply text-primary-light dark:text-primary-dark bg-surface-container-highest-light dark:bg-surface-container-highest-dark
+}
+
+.filled-icon-button-disabled {
+    @apply bg-on-surface-light/[12%] dark:bg-on-surface-dark/[12%] text-on-surface-light/[38%] dark:text-on-surface-dark/[38%]
+}
+
+.filled-icon-button .icon-button-state-layer {
+    @apply bg-transparent dark:bg-transparent group-active/icon-button:bg-primary-light/[12%] dark:group-active/icon-button:bg-primary-dark/[12%] group-focus/icon-button:bg-primary-light/[12%] dark:group-focus/icon-button:bg-primary-dark/[12%] group-hover/icon-button:bg-primary-light/[8%] dark:group-hover/icon-button:bg-primary-dark/[8%]
+}
+
+.filled-icon-button-selected {
+    @apply text-on-primary-light dark:text-on-primary-dark bg-primary-light dark:bg-primary-dark
+}
+
+.filled-icon-button-selected .icon-button-state-layer {
+    @apply bg-transparent dark:bg-transparent group-active/icon-button:bg-on-primary-light/[12%] dark:group-active/icon-button:bg-on-primary-dark/[12%] group-focus/icon-button:bg-on-primary-light/[12%] dark:group-focus/icon-button:bg-on-primary-dark/[12%] group-hover/icon-button:bg-on-primary-light/[8%] dark:group-hover/icon-button:bg-on-primary-dark/[8%]
+}
+
+/*outline icon button style*/
+.outlined-icon-button-disabled {
+    @apply border border-on-surface-light/[12%] dark:border-on-surface-dark/[12%] text-on-surface-light/[38%] dark:text-on-surface-dark/[38%]
+}
+
+.outlined-icon-button-selected-disabled {
+    @apply text-on-surface-light/[38%] dark:text-on-surface-dark/[38%] bg-on-surface-light/[12%] dark:bg-on-surface-dark/[12%]
+}
+
+.outlined-icon-button {
+    @apply group-active/icon-button:bg-on-surface-variant-light/[12%] dark:group-active/icon-button:bg-on-surface-variant-dark/[12%] group-focus/icon-button:bg-on-surface-variant-light/[12%] dark:group-focus/icon-button:bg-on-surface-variant-dark/[12%] group-hover/icon-button:bg-on-surface-variant-light/[8%] dark:group-hover/icon-button:bg-on-surface-variant-dark/[8%] border border-outline-light dark:border-outline-dark text-on-surface-variant-light dark:text-on-surface-variant-dark
+}
+
+.outlined-icon-button-selected .icon-button-state-layer {
+    @apply bg-transparent;
+}
+
+.outlined-icon-button-selected {
+    @apply bg-inverse-surface-light dark:bg-inverse-surface-dark text-inverse-on-surface-light dark:text-inverse-on-surface-dark
+}
+
+.outlined-icon-button-selected .icon-button-state-layer {
+    @apply bg-transparent group-active/icon-button:bg-inverse-on-surface-light/[12%] dark:group-active/icon-button:bg-inverse-on-surface-dark/[12%] group-focus/icon-button:bg-inverse-on-surface-light/[12%] dark:group-focus/icon-button:bg-inverse-on-surface-dark/[12%] group-hover/icon-button:bg-inverse-on-surface-light/[8%] dark:group-hover/icon-button:bg-inverse-on-surface-dark/[8%]
+}
+
+/*field tonal icon button style*/
+.filled-tonal-icon-button-disabled {
+    @apply bg-on-surface-light/[12%] dark:bg-on-surface-dark/[12%] text-on-surface-light/[38%] dark:text-on-surface-dark/[38%]
+}
+
+.filled-tonal-icon-button {
+    @apply text-on-surface-variant-light dark:text-on-surface-variant-dark bg-surface-container-highest-light dark:bg-surface-container-highest-dark
+
+}
+
+.filled-tonal-icon-button .icon-button-state-layer {
+    @apply group-active/icon-button:bg-on-surface-variant-light/[12%] dark:group-active/icon-button:bg-on-surface-variant-dark/[12%] group-focus/icon-button:bg-on-surface-variant-light/[12%] dark:group-focus/icon-button:bg-on-surface-variant-dark/[12%] group-hover/icon-button:bg-on-surface-variant-light/[8%] dark:group-hover/icon-button:bg-on-surface-variant-dark/[8%]
+
+}
+
+.filled-tonal-icon-button-selected {
+    @apply text-on-secondary-container-light dark:text-on-secondary-container-dark bg-secondary-container-light dark:bg-secondary-container-dark
+}
+
+.filled-tonal-icon-button-selected .icon-button-state-layer {
+    @apply group-active/icon-button:bg-on-secondary-container-light/[12%] dark:group-active/icon-button:bg-on-secondary-container-dark/[12%] group-focus/icon-button:bg-on-secondary-container-light/[12%] dark:group-focus/icon-button:bg-on-secondary-container-dark/[12%] group-hover/icon-button:bg-on-secondary-container-light/[8%] dark:group-hover/icon-button:bg-on-secondary-container-dark/[8%]
+
+}
+
+/*standard icon button style*/
+.standard-icon-disabled {
+    @apply text-on-surface-light/[38%] dark:text-on-surface-dark/[38%]
+}
+
+.standard-icon-button {
+    @apply group-active/icon-button:bg-on-surface-variant-light/[12%] dark:group-active/icon-button:bg-on-surface-variant-dark/[12%] group-focus/icon-button:bg-on-surface-variant-light/[12%] dark:group-focus/icon-button:bg-on-surface-variant-dark/[12%] group-hover/icon-button:bg-on-surface-variant-light/[8%] dark:group-hover/icon-button:bg-on-surface-variant-dark/[8%] text-on-surface-variant-light dark:text-on-surface-variant-dark
+}
+
+.standard-icon-button-selected {
+    @apply group-active/icon-button:bg-primary-light/[12%] dark:group-active/icon-button:bg-primary-dark/[12%] group-focus/icon-button:bg-primary-light/[12%] dark:group-focus/icon-button:bg-primary-dark/[12%] group-hover/icon-button:bg-primary-light/[8%] dark:group-hover/icon-button:bg-primary-dark/[8%] text-primary-light dark:text-primary-dark
+}
+
+/*------------------------------------------*/
+
+/*
+Material Design Version 3
+Checkbox Classes
+ */
+.checkbox-container {
+    @apply w-[48px] h-[48px] flex items-center justify-center ;
+}
+
+.checkbox {
+    @apply w-[40px] h-[40px] overflow-hidden rounded-full flex items-center justify-center
+}
+
+.checkbox-state-layer {
+    @apply w-full h-full rounded-full flex items-center justify-center;
+}
+
+.checkbox-selected-primary {
+    @apply text-primary-light dark:text-primary-dark
+}
+
+.checkbox-un-selected-primary {
+    @apply text-on-surface-variant-light dark:text-on-surface-variant-dark
+}
+
+.checkbox-selected-primary .checkbox-state-layer {
+    @apply group-hover:bg-primary-light/[8%] dark:group-hover:bg-primary-dark/[8%] group-active:bg-primary-light/[12%] dark:group-active:bg-primary-dark/[12%] group-focus:bg-primary-light/[12%] dark:group-focus:bg-primary-dark/[12%]
+}
+
+.checkbox-un-selected-primary .checkbox-state-layer {
+    @apply hover:bg-on-surface-light/[8%] dark:hover:bg-on-surface-dark/[8%] group-focus:bg-on-surface-light/[12%] dark:group-focus:bg-on-surface-dark/[12%] group-active:bg-on-surface-light/[12%] dark:group-active:bg-on-surface-dark/[12%]
+}
+
+.checkbox-selected-error {
+    @apply text-error-light dark:text-error-dark
+}
+
+.checkbox-un-selected-error {
+    @apply text-error-light dark:text-error-dark
+
+}
+
+.checkbox-selected-error .checkbox-state-layer {
+    @apply group-hover:bg-error-light/[8%] dark:group-hover:bg-error-dark/[8%] group-active:bg-error-light/[12%] dark:group-active:bg-error-dark/[12%] group-focus:bg-error-light/[12%] dark:group-focus:bg-error-dark/[12%]
+}
+
+.checkbox-un-selected-error .checkbox-state-layer {
+    @apply group-hover:bg-error-light/[8%] dark:group-hover:bg-error-dark/[8%] group-active:bg-error-light/[12%] dark:group-active:bg-error-dark/[12%] group-focus:bg-error-light/[12%] dark:group-focus:bg-error-dark/[12%]
+}
+
+.checkbox-label {
+    @apply cursor-pointer text-label-medium text-on-surface-light dark:text-on-surface-dark
+}
+
+.checkbox-disable {
+    @apply text-on-surface-light/[38%] dark:text-on-surface-dark/[38%]
+}
+
+/*------------------------------------------*/
+
+/*
+Material Design Version 3
+Checkbox Classes
+*/
+
+.divider {
+    @apply border-outline-variant-light dark:border-outline-variant-dark;
+}
+
+.divider-vertical-inset {
+    @apply h-[calc(100%_-_16px)] mt-auto w-[1px] border-r border-t-0
+}
+
+.divider-vertical-inset-middle {
+    @apply h-[calc(100%_-_32px)] my-auto w-[1px] border-r border-t-0
+}
+
+.divider-vertical {
+    @apply h-[100%] w-[1px] border-r border-t-0
+}
+
+.divider-horizontal {
+    @apply w-full border-t;
+}
+
+.divider-horizontal-inset-middle {
+    @apply w-[calc(100%_-_32px)] mx-auto border-t;
+}
+
+.divider-horizontal-inset {
+    @apply w-[calc(100%_-_16px)] ml-auto border-t;
+}
+
+/*------------------------------------------*/
+
+/*
+Material Design Version 3
+Snackbar Classes
+*/
+.snackbar {
+    @apply fixed pl-[16px] flex items-center bg-inverse-surface-light dark:bg-inverse-surface-dark text-inverse-on-surface-light dark:text-inverse-on-surface-dark bottom-6
+}
+
+.snackbar-with-icon {
+    @apply pr-0
+}
+
+.snackbar-standard {
+    @apply pr-4
+}
+
+.snackbar-with-action {
+    @apply pr-2
+}
+
+.snackbar-with-action {
+    @apply pr-2
+}
+
+.snackbar-left {
+    @apply md:left-6 md:translate-x-0 left-1/2 transform -translate-x-1/2
+}
+
+.snackbar-center {
+    @apply left-1/2 transform -translate-x-1/2
+}
+
+.snackbar-fit {
+    @apply w-[calc(100%_-_48px)] md:w-[344px]
+}
+
+.snackbar-full-width {
+    @apply w-[calc(100%_-_48px)]
+}
+
+.snackbar-multi-line {
+    @apply h-[68px]
+}
+
+.snackbar-single-line {
+    @apply h-[48px]
+}
+
+.snackbar-action {
+    @apply ml-1
+}
+
+.snackbar-message {
+    @apply text-body-medium whitespace-normal flex-1
+}
+
+.snackbar-action .text-button {
+    @apply !text-inverse-primary-light dark:!text-inverse-primary-dark
+}
+
+.snackbar-action .text-button .button-state-layer {
+    @apply active:!bg-inverse-primary-light/[12%] dark:active:!bg-inverse-primary-dark/[12%] focus:!bg-inverse-primary-light/[12%] dark:focus:!bg-inverse-primary-dark/[12%] hover:!bg-inverse-primary-light/[8%] dark:hover:!bg-inverse-primary-dark/[8%]
+}
+
+.snackbar-icon-button .icon-button-container .standard-icon-button {
+    @apply !text-inverse-on-surface-light dark:!text-inverse-on-surface-dark
+}
+
+.snackbar-icon-button .icon-button-container:hover .standard-icon-button {
+    @apply !bg-inverse-on-surface-light/[8%] dark:!bg-inverse-on-surface-dark/[8%]
+}
+
+.snackbar-icon-button .icon-button-container:focus .standard-icon-button {
+    @apply !bg-inverse-on-surface-light/[12%] dark:!bg-inverse-on-surface-dark/[12%]
+}
+
+.snackbar-icon-button .icon-button-container:active .standard-icon-button {
+    @apply !bg-inverse-on-surface-light/[12%] dark:!bg-inverse-on-surface-dark/[12%]
+}
+
+/*------------------------------------------*/
+
+/*
+Material Design Version 3
+Switch Classes
+*/
+.switch {
+    @apply relative inline-flex h-[32px] w-[52px] items-center rounded-full
+}
+
+.switch-open {
+    @apply !bg-primary-light dark:!bg-primary-dark
+}
+
+.switch-close {
+    @apply outline outline-[2px] -outline-offset-2 outline-outline-light dark:outline-outline-dark bg-surface-container-highest-light dark:bg-surface-container-highest-dark
+}
+
+.switch-disable-open {
+    @apply bg-on-surface-light/[12%] dark:bg-on-surface-dark/[12%]
+}
+.switch-disable-close {
+    @apply outline outline-[2px] -outline-offset-2 outline-on-surface-light/[12%] dark:outline-on-surface-dark/[12%] bg-surface-variant-light/[12%] dark:bg-surface-variant-dark/[12%]
+}
+
+
+.switch-indicator-button {
+    @apply transition-transform duration-300 rounded-full  transform flex items-center justify-center
+}
+
+.switch-indicator-container {
+    @apply active:bg-primary-light/[80%] dark:active:bg-primary-dark/[12%] focus:bg-primary-light/[12%] dark:focus:bg-primary-dark/[12%] hover:bg-primary-light/[8%] dark:hover:bg-primary-dark/[8%] flex items-center justify-center h-10 w-10 rounded-full
+}
+.switch-indicator-container-disable{
+    @apply flex items-center justify-center h-10 w-10 rounded-full
+}
+
+
+.switch-indicator {
+    @apply transition items-center justify-center duration-300 group-active/switch:w-[28px] group-active/switch:h-[28px] inline-flex rounded-full
+}
+
+
+.switch-indicator-open {
+    @apply group-focus/switch:bg-primary-container-light dark:group-focus/switch:bg-primary-container-dark group-hover/switch:bg-primary-container-light dark:group-hover/switch:bg-primary-container-dark bg-on-primary-light dark:bg-on-primary-dark
+}
+
+.switch-indicator-close {
+    @apply group-focus/switch:bg-on-surface-variant-light dark:group-focus/switch:bg-on-surface-variant-dark group-hover/switch:bg-on-surface-variant-light dark:group-hover/switch:bg-on-surface-variant-dark bg-outline-light dark:bg-outline-dark
+}
+.switch-indicator-close-size-small{
+    @apply h-4 w-4
+}
+.switch-indicator-close-size-normal{
+    @apply h-6 w-6
+}
+
+.switch-indicator-icon-open {
+    @apply w-4 h-4 text-[16px] font-medium text-on-primary-container-light dark:text-on-primary-container-dark
+}
+
+.switch-indicator-icon-close {
+    @apply w-4 h-4 text-[16px] font-medium text-surface-container-highest-light dark:text-surface-container-highest-dark
+}
+
+.switch-indicator-disable-open{
+    @apply bg-surface-light dark:bg-surface-dark
+}
+.switch-indicator-disable-close{
+    @apply bg-on-surface-light/[35%] dark:bg-on-surface-dark/[35%]
+}
+.switch-disabled .switch-indicator-icon-close{
+    @apply text-on-surface-light/[35%] dark:text-on-surface-dark/[35%]
+}
+.switch-disabled .switch-indicator-icon-open {
+    @apply text-surface-container-highest-light/[35%] dark:text-surface-container-highest-dark/[35%]
+}
