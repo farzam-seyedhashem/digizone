@@ -3,18 +3,19 @@ import {store} from '@backend/_controller/BlogController'
 import {redirect} from 'next/navigation'
 import {revalidateTag} from "next/cache";
 import {store as storeImage} from "@backend/_controller/ImageController";
+import Editor from "@admin/Editor";
 
 export default function Page() {
 
     async function createInvoice(formData) {
         'use server'
         console.log("HELLO");
-        let image  = await storeImage(formData.getAll('file')[0])
+        let image = await storeImage(formData.getAll('file')[0])
         // console.log(formData);
         const rawFormData = {
             title: formData.get('title'),
             slug: formData.get('slug'),
-            thumbnail:image.id,
+            thumbnail: image.id,
             content: formData.get('content'),
         }
         console.log(rawFormData)
@@ -41,16 +42,19 @@ export default function Page() {
                         <input required name={'slug'} placeholder={"لینک"}
                                className={"col-span-4 text-on-surface-light border border-outline-light rounded-[8px] "}/>
                         <div className={"col-span-4"}>
-                            <Button icon={"upload"} variant={"outlined"} className={"flex w-fit"} htmlFor={"imageFile"} component={"label"} type={"button"}>
+                            <Button icon={"upload"} variant={"outlined"} className={"flex w-fit"} htmlFor={"imageFile"}
+                                    component={"label"} type={"button"}>
                                 آپلود عکس
                             </Button>
                             <input required className={"hidden"} id={"imageFile"}
                                    name="file" type="file" multiple={false}/>
 
                         </div>
-                        <textarea required name={'content'} minLength={12} placeholder={"متن"}
-                                  className={"h-[400px] col-span-12 text-on-surface-light border border-outline-light rounded-[8px] "}/>
-
+                        {/*<textarea required name={'content'} minLength={12} placeholder={"متن"}*/}
+                        {/*          className={"h-[400px] col-span-12 text-on-surface-light border border-outline-light rounded-[8px] "}/>*/}
+                       <div className={"col-span-12"}>
+                        <Editor name={"content"}/>
+                       </div>
                         <div className={"flex col-span-12 justify-end"}>
                             <Button type={"submit"} icon={"save"} variant={"filled"}>
                                 ذخیره

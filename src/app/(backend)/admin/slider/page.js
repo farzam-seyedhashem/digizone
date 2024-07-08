@@ -1,12 +1,12 @@
 import Link from "next/link";
-import IconButton from "../../../components/m3_design/icon_buttons/IconButton";
+import IconButton from "@/components/m3_design/icon_buttons/IconButton";
 import Button from "@m3/buttons/Button";
-import {index,destroy} from "@/app/_controller/SliderController";
+import {index,destroy} from "@backend/_controller/SliderController";
 import Image from 'next/image'
 import {redirect} from "next/navigation";
 async function getData() {
     'use server'
-    return await index()
+    return JSON.parse(await index())
 }
 
 export default async function Page() {
@@ -58,7 +58,6 @@ export default async function Page() {
                                     <td className={"font-medium"}>
                                         <Image className={"rounded-full"} width={40} height={40} alt={''}
                                                src={`/data${slide.image.url}`}/>
-
                                     </td>
                                     <td>{slide.description}</td>
                                     <td>{new Date(slide.createdAt).toLocaleDateString("fa-IR")}</td>
@@ -71,7 +70,7 @@ export default async function Page() {
                                                 </IconButton>
                                             </Link>
                                             <form action={deleteData} method={"delete"}>
-                                               <input hidden value={slide.id} name="id" />
+                                               <input hidden value={slide._id} name="id" />
                                                 <IconButton className={"text-error-light"}>
                                                     delete
                                                 </IconButton>

@@ -1,6 +1,6 @@
 import Button from "@m3/buttons/Button";
-import {update, getById} from '@/app/_controller/SliderController'
-import {store as storeImage} from '@/app/_controller/ImageController'
+import {update, getById} from '@backend/_controller/SliderController'
+import {store as storeImage} from '@backend/_controller/ImageController'
 import {redirect} from 'next/navigation'
 import {revalidateTag} from "next/cache";
 async function getData(slug) {

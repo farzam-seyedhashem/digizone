@@ -1,112 +1,157 @@
+'use server'
 import Image from "next/image";
-export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.js</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+import {index as getAllSlider} from "@backend/_controller/SliderController"
+import {index as getAllPosts} from "@backend/_controller/BlogController"
+import {index as getAllProductCategories} from "@backend/_controller/CategoryController"
+import {index as getAllProducts} from "@backend/_controller/ProductController"
+import Slider from "@website/Slider";
+import {Suspense} from "react";
+import {cache} from 'react'
+import Link from "next/link";
+import Button from "@m3/buttons/Button";
+import Typography from "@m3/assets/typography/Typography";
+import Icon from "@m3/assets/icons/Icon";
+import PostCardHorizontal from "@website/PostCardHorizontal";
+import ProductCardHorizontal from "@website/ProductCardHorizontal";
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+const getSlides = cache(async () => {
+    return JSON.parse(await getAllSlider())
+})
+const getLastPosts = cache(async () => {
+    return JSON.parse(await getAllPosts({pageNumber: 1, per_page: 4}))
+})
+const getCategories = cache(async () => {
+    return JSON.parse(await getAllProductCategories({topCategory: null, pageNumber: 1, per_page: 12}))
+})
+const getLastProduct = cache(async () => {
+    return JSON.parse(await getAllProducts({pageNumber: 1, per_page: 4}))
+})
+export default async function Home() {
+    const slidesData = getSlides()
+    const lastPosts = getLastPosts()
+    const categoriesData = getCategories()
+    const productsData = getLastProduct()
+    const [products,slides, postsData, categories] = await Promise.all([productsData,slidesData, lastPosts, categoriesData])
+   // console.log("product",products[0].spec[0].key.values)
+    return (
+        <main className=" bg-surface-light dark:bg-surface-dark">
 
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+            <div className={"md:px-4 min-h-screen pt-6  mx-auto"}>
+                <Slider slidesData={slides}/>
+                <div className={"mt-12 flex items-center"}>
+                    {categories.map((category) => (
+                        <div className={"px-6"} key={category._id}>
+                            <div className={"mx-auto relative rounded-[8px] overflow-hidden w-[80px] h-[80px]"}>
+                                <Image layout={"fill"} src={"/data" + category.thumbnail.url} alt={category.title}/>
+                            </div>
+                            <h2 className={"mt-2 text-center font-bold text-on-surface-light text-label-large dark:text-on-surface-dark"}>
+                                {category.title}
+                            </h2>
+                        </div>
+                    ))}
+                </div>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
+                <Typography type={"h2"}
+                            className={"mt-10 text-display-small text-on-surface-light dark:text-on-surface-dark"}>
+                    آخرین محصولات دیجی زون
+                </Typography>
+                <Typography type={"h3"}
+                            className={"mt-1 mb-4 font-medium dark:text-on-surface-variant-dark text-on-surface-variant-light  "}>
+                    لیست آخرین محصولات در دیجی زون
+                </Typography>
+                <div className={"grid grid-cols-4 gap-4"}>
+                {products.map(product=><ProductCardHorizontal key={product._id} product={product}/>)}
+                </div>
+                <Typography type={"h2"}
+                            className={"mt-10 text-display-small text-on-surface-light dark:text-on-surface-dark"}>
+                    آخرین مقالات دیجی زون
+                </Typography>
+                <Typography type={"h3"}
+                            className={"mt-1 mb-4 font-medium dark:text-on-surface-variant-dark text-on-surface-variant-light  "}>
+                    لیست آخرین مقالات در دیجی زون
+                </Typography>
+                <div className={"grid grid-cols-4  gap-4"}>
+                    {postsData.data.map((post, index) =>  <PostCardHorizontal post={post} key={index}/>)}
+                </div>
+                <Typography type={"h2"}
+                            className={"mt-10 text-display-small text-on-surface-light dark:text-on-surface-dark"}>
+                    چرا دیجی زون
+                </Typography>
+                <Typography type={"h3"}
+                            className={"mt-1 mb-4 font-medium dark:text-on-surface-variant-dark text-on-surface-variant-light  "}>
+                    برتری ما نسبت به رقبا
+                </Typography>
+                <div className={"grid grid-cols-1 md:grid-cols-4 gap-4"}>
+                    <div
+                        className={"px-6 py-6  group relative rounded-[24px] bg-surface-container-high-light dark:bg-surface-container-high-dark hover:bg-secondary-container-light dark:hover:bg-secondary-container-dark"}>
+                        <div
+                            className={"absolute top-6 left-6 rounded-[8px] h-12 w-12 flex items-center justify-center group-hover:bg-secondary-light dark:group-hover:bg-secondary-dark bg-secondary-container-light dark:bg-secondary-container-dark"}>
+                            <Icon size={32} type={"outline"}
+                                  className={"text-on-secondary-container-light dark:text-on-secondary-container-dark group-hover:text-on-secondary-light dark:group-hover:text-on-secondary-dark"}>
+                                savings
+                            </Icon>
+                        </div>
+                        <h3 className={"pt-20 text-title-large font-bold mb-2 group-hover:text-on-secondary-container-light dark:group-hover:text-on-secondary-container-dark text-on-surface-light dark:text-on-surface-dark"}>
+                            قیمت پایین
+                        </h3>
+                        <p className={"text-body-large group-hover:text-on-secondary-container-light dark:group-hover:text-on-secondary-container-dark text-on-surface-light dark:text-on-surface-dark"}>
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
+                            قیمت محصولات ما به دلیل اینکه خودمان وارد کننده ی آن هستیم پایین تر است.
+                        </p>
+                    </div>
+                    <div
+                        className={"px-6 py-6  group relative rounded-[24px] bg-surface-container-high-light dark:bg-surface-container-high-dark hover:bg-secondary-container-light dark:hover:bg-secondary-container-dark"}>
+                        <div
+                            className={"absolute top-6 left-6 rounded-[8px] h-12 w-12 flex items-center justify-center group-hover:bg-secondary-light dark:group-hover:bg-secondary-dark bg-secondary-container-light dark:bg-secondary-container-dark"}>
+                            <Icon size={32} type={"outline"}
+                                  className={"text-on-secondary-container-light dark:text-on-secondary-container-dark group-hover:text-on-secondary-light dark:group-hover:text-on-secondary-dark"}>
+                                check_circle
+                            </Icon>
+                        </div>
+                        <h3 className={"pt-20 text-title-large font-bold mb-2 group-hover:text-on-secondary-container-light dark:group-hover:text-on-secondary-container-dark text-on-surface-light dark:text-on-surface-dark"}>
+                            گارانتی و مهلت تست
+                        </h3>
+                        <p className={"text-body-large group-hover:text-on-secondary-container-light dark:group-hover:text-on-secondary-container-dark text-on-surface-light dark:text-on-surface-dark"}>
+                            مهلت تست ۱۵ روزه و امکان درخواست گارانتی ۱ ساله در دیجی زون امکان پذیر است.
+                        </p>
+                    </div>
+                    <div
+                        className={"px-6 py-6  group relative rounded-[24px] bg-surface-container-high-light dark:bg-surface-container-high-dark hover:bg-secondary-container-light dark:hover:bg-secondary-container-dark"}>
+                        <div
+                            className={"absolute top-6 left-6 rounded-[8px] h-12 w-12 flex items-center justify-center group-hover:bg-secondary-light dark:group-hover:bg-secondary-dark bg-secondary-container-light dark:bg-secondary-container-dark"}>
+                            <Icon size={32} type={"outline"}
+                                  className={"text-on-secondary-container-light dark:text-on-secondary-container-dark group-hover:text-on-secondary-light dark:group-hover:text-on-secondary-dark"}>
+                                checklist
+                            </Icon>
+                        </div>
+                        <h3 className={"pt-20 text-title-large font-bold mb-2 group-hover:text-on-secondary-container-light dark:group-hover:text-on-secondary-container-dark text-on-surface-light dark:text-on-surface-dark"}>
+                            تنوع بالا محصولات
+                        </h3>
+                        <p className={"text-body-large group-hover:text-on-secondary-container-light dark:group-hover:text-on-secondary-container-dark text-on-surface-light dark:text-on-surface-dark"}>
+                            انواع مختلف محصولات در دیجی زون
+                        </p>
+                    </div>
+                    <div
+                        className={"px-6 py-6  group relative rounded-[24px] bg-surface-container-high-light dark:bg-surface-container-high-dark hover:bg-secondary-container-light dark:hover:bg-secondary-container-dark"}>
+                        <div
+                            className={"absolute top-6 left-6 rounded-[8px] h-12 w-12 flex items-center justify-center group-hover:bg-secondary-light dark:group-hover:bg-secondary-dark bg-secondary-container-light dark:bg-secondary-container-dark"}>
+                            <Icon size={32} type={"outline"}
+                                  className={"text-on-secondary-container-light dark:text-on-secondary-container-dark group-hover:text-on-secondary-light dark:group-hover:text-on-secondary-dark"}>
+                                handshake
+                            </Icon>
+                        </div>
+                        <h3 className={"pt-20 text-title-large font-bold mb-2 group-hover:text-on-secondary-container-light dark:group-hover:text-on-secondary-container-dark text-on-surface-light dark:text-on-surface-dark"}>
+                            قابلیت دریافت سفارش در تعداد بالا
+                        </h3>
+                        <p className={"text-body-large group-hover:text-on-secondary-container-light dark:group-hover:text-on-secondary-container-dark text-on-surface-light dark:text-on-surface-dark"}>
+                            دیجی زون توانایی واردات و دریافت سفارش در تعداد بالا را دارد.
+                        </p>
+                    </div>
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  );
+                </div>
+
+            </div>
+
+        </main>
+    );
 }

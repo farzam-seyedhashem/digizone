@@ -1,9 +1,10 @@
 import {db} from '../_helper/db'
 const Blog = db.Blog
 
-async function index() {
-    // const resPerPage = parseInt(req.query.per_page) || 12;
-    // const page = parseInt(req.query.page) || 1;
+async function index(options) {
+    const {per_page,pageNumber} = options || {per_page:12,pageNumber:1}
+    // const resPerPage = parseInt(per_page) || 12;
+    // const page = parseInt(pageNumber) || 1;
     // const category = req.query.category || "all";
     // let filterObject = {}
     // const tagQuery = req.query.tag;
@@ -21,29 +22,34 @@ async function index() {
     //         "$regex": sQuery, "$options": "i"
     //     };
     // }
-    // const response = {
-    //     "model": Blog.info(),
-    //     "currentPage": page,
-    //     "data": [],
-    //     "perPage": resPerPage,
-    //     "lastPage": false,
-    //     "lastPageIndex": 1,
-    //     "count": 1
-    // }
+    const response = {
+        "currentPage": pageNumber,
+        "data": [],
+        "perPage": per_page,
+        "lastPage": false,
+        "lastPageIndex": 1,
+        "count": 1
+    }
     // Blog.find({}).exec(function (err,docs ) {
     //    return docs
     // })
-    return await Blog.find({}).populate('thumbnail')
+    const count = await Blog.countDocuments();
+    response.lastPageIndex = Math.ceil(count / per_page)
+    response.itemCount = count
+    if (count <= (per_page * pageNumber)) {
+        response.lastPage = true
+    }
+    response.data = await Blog.find({}).skip((per_page * pageNumber) - per_page).limit(per_page).sort({'createdAt': -1}).populate('thumbnail')
+
+    return JSON.stringify(response)
 
     // try {
     // Blog.find(filterObject).skip((resPerPage * page) - resPerPage)
     //     .limit(resPerPage).sort({'createdAt': -1}).populate('tags').populate('thumbnail').exec(function (err, docs) {
     //     Blog.count(filterObject).exec(function (err, count) {
-    //         response.lastPageIndex = Math.ceil(count / resPerPage)
-    //         response.itemCount = count
-    //         if (count <= (resPerPage * page)) {
-    //             response.lastPage = true
-    //         }
+    //
+    //
+    //
     //         response.data = docs;
     //         res.send(response);
     //     })
@@ -79,10 +85,12 @@ async function show(req, res) {
 }
 
 // Display the specified resource.
-async function getById(req, res) {
-    Blog.findById(req.query.slug).populate('tags').populate('categories').populate('thumbnail').exec(function (err, docs) {
-        res.send(docs[0])
-    });
+async function getById(id) {
+    return await Blog.findById(id).populate('thumbnail')
+}
+async function getBySlug(slug) {
+    return JSON.stringify(await Blog.findOne({slug:slug}).populate('thumbnail'))
+
 }
 
 async function comments(req, res) {
@@ -119,6 +127,7 @@ async function destroy(id) {
 }
 
 export {
+    getBySlug,
     index,
     show,
     store,

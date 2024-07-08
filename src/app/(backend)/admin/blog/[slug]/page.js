@@ -1,8 +1,8 @@
 import Button from "@m3/buttons/Button";
-import {store} from '@/app/_controller/BlogController'
+import {store} from '@backend/_controller/BlogController'
 import {redirect} from 'next/navigation'
 import {revalidateTag} from "next/cache";
-import {store as storeImage} from "@/app/_controller/ImageController";
+import {store as storeImage} from "@backend/_controller/ImageController";
 
 export default function Page() {
 
@@ -13,7 +13,7 @@ export default function Page() {
         // console.log(formData);
         const rawFormData = {
             title: formData.get('title'),
-            slug: formData.get('link'),
+            slug: formData.get('slug'),
             thumbnail:image.id,
             content: formData.get('content'),
         }
@@ -38,7 +38,7 @@ export default function Page() {
                     <form action={createInvoice} className={"mt-4 gap-4 grid grid-cols-12 "}>
                         <input required name={'title'} placeholder={"عنوان مقاله"}
                                className={"col-span-4 text-on-surface-light border border-outline-light rounded-[8px] "}/>
-                        <input required name={'link'} placeholder={"لینک"}
+                        <input required name={'slug'} placeholder={"لینک"}
                                className={"col-span-4 text-on-surface-light border border-outline-light rounded-[8px] "}/>
                         <div className={"col-span-4"}>
                             <Button icon={"upload"} variant={"outlined"} className={"flex w-fit"} htmlFor={"imageFile"} component={"label"} type={"button"}>

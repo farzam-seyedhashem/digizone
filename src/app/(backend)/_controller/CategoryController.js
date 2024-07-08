@@ -1,9 +1,9 @@
-import {DB} from '@/app/_helper/DB'
-import res from "../../../font-vs";
-// import CategoryTagsModel from "../models/CategoryTagsModel"
-// import ImageModel from "../models/ImageModel"
-const Category = DB.Category
-async function index(req, res) {
+import {db} from '@backend/_helper/db'
+import {CategoryModel} from "@backend/_models/CategoryModel";
+
+const Category = db.Category
+
+async function index(options) {
     // const resPerPage = parseInt(req.query.per_page) || 12;
     // const page = parseInt(req.query.page) || 1;
     // const category = req.query.category || "all";
@@ -35,7 +35,8 @@ async function index(req, res) {
     // Category.find({}).exec(function (err,docs ) {
     //    return docs
     // })
-    return await Category.find();
+
+    return JSON.stringify(await Category.find(options?.filter?options.filter:{}).populate({path:'thumbnail',strictPopulate: false}).populate({path:'topCategory',strictPopulate: false}));
 
     // try {
     // CategoryModel.find(filterObject).skip((resPerPage * page) - resPerPage)
@@ -67,27 +68,27 @@ async function index(req, res) {
 async function store(body) {
 
     // console.log("ewklmfln",body.title)
-
+    console.log(body);
     let newNews = new Category(body);
     await newNews.save();
     return newNews
 }
 
 // Display the specified resource.
-async function show(req, res) {
-    const docs = await CategoryModel.find({slug: req.query.slug}).populate('tags').populate('thumbnail').exec(function (err, docs) {
-        res.send(docs[0])
-    });
-    // console.log(docs)
-    //  return docs[0]
-}
+// async function show(req, res) {
+//     const docs = await CategoryModel.find({slug: req.query.slug}).populate('tags').populate('thumbnail').exec(function (err, docs) {
+//         res.send(docs[0])
+//     });
+//     // console.log(docs)
+//     //  return docs[0]
+// }
 
 // Display the specified resource.
-async function getById(req, res) {
-    CategoryModel.findById(req.query.slug).populate('tags').populate('categories').populate('thumbnail').exec(function (err, docs) {
-        res.send(docs[0])
-    });
-}
+// async function getById(req, res) {
+//     CategoryModel.findById(req.query.slug).populate('tags').populate('categories').populate('thumbnail').exec(function (err, docs) {
+//         res.send(docs[0])
+//     });
+// }
 
 async function comments(req, res) {
     let body = req.body;
@@ -96,6 +97,7 @@ async function comments(req, res) {
         email: body.email,
         websiteURL: body?.websiteURL,
         content: body.content,
+
         createdAt: Date.now(),
         approved: "0",
     };
@@ -108,29 +110,40 @@ async function comments(req, res) {
 }
 
 // Update the specified resource in storage.
-async function update(req, res) {
-    let body = req.body;
+async function update(body) {
+    // let body = req.body;
     // let doc = CategoryModel.findOneAndUpdate({_id: req.query.id}, body);
-    CategoryModel.findOneAndUpdate({_id: req.query.slug}, body, {new: true}, function (err, response) {
-        res.send(response)
-    });
+
+    return await Category.findOneAndUpdate({_id: body.id}, body, {new: true});
+
 
 };
 
+async function getById(id) {
+    return JSON.stringify(await Category.findOne({_id: id}).populate({
+        path: 'spec.key',
+        strictPopulate: false
+    }).populate('thumbnail'));
+}
+
+async function getBySlug(slug) {
+    return JSON.stringify(await Category.findOne({slug: slug}).populate({
+        path: 'spec.key',
+        strictPopulate: false
+    }).populate('thumbnail'))
+}
 // Remove the specified resource from storage.
-async function destroy(req, res) {
-    CategoryModel.remove({_id: req.query.slug}, function (err, updateObj) {
-        res.send(updateObj)
-    });
-};
+async function destroy(id) {
+    return await Category.findOneAndDelete({_id: id});
+}
 
 export {
     index,
-    show,
     store,
-    getById,
     comments,
     update,
-    destroy
+    destroy,
+    getById,
+    getBySlug,
 
 }

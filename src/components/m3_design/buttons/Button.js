@@ -1,9 +1,9 @@
 import Icon from "@m3/assets/icons/Icon";
 
-export default function Button({type, component, children, icon, className, ...other}) {
+export default function Button({variant, component, children, icon, className, ...other}) {
     let Component = component || "button"
     let classes = ""
-    switch (type) {
+    switch (variant) {
         case "elevated":
             classes = "elevated-button"
             break

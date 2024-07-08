@@ -1,9 +1,9 @@
 import {getByCatId} from '@backend/_controller/ProductSpecController';
 
-export async function GET(request) {
+export async function GET(request,{ params }) {
     // const body = await req.json();
-    console.log("catid",request)
-    // return await getByCatId(params["cat-id"]);
+    console.log(await getByCatId(params["cat-id"]))
+    return Response.json(await getByCatId(params["cat-id"]));
 }
 
 // module.exports = {

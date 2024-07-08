@@ -1,21 +1,31 @@
 import Button from "@m3/buttons/Button";
-import {store} from '@backend/_controller/SliderController'
+import {index, store} from '@backend/_controller/CategoryController'
 import {store as storeImage} from '@backend/_controller/ImageController'
 import {redirect} from 'next/navigation'
 import {revalidateTag} from "next/cache";
 
-export default function Page() {
+async function getTopCategories() {
+    'use server'
+    return JSON.parse(await index({topCategories: null}))
+}
+
+export default async function Page() {
+    const data = await getTopCategories()
+    console.log(data)
+
     async function createInvoice(formData) {
         'use server'
         const image = await storeImage(formData.getAll('file')[0])
         const rawFormData = {
             title: formData.get('title'),
-            description: formData.get('content'),
-            image: image.id
+            slug: formData.get('slug'),
+            topCategory: formData.get('top-category'),
+            content: formData.get('content'),
+            thumbnail: image.id
         }
         await store(rawFormData)
-        revalidateTag("sliderSlides")
-        redirect(`/admin/slider`)
+        // revalidateTag("sliderSlides")
+        redirect(`/admin/product-category`)
     }
 
     // async function createInvoice(data) {
@@ -32,13 +42,24 @@ export default function Page() {
                         افزودن اسلاید جدید
                     </h1>
                     <form method={"post"} action={createInvoice} className={"mt-4 gap-4 grid grid-cols-12 "}>
-                        <input name={'title'} placeholder={"عنوان مقاله"}
+                        <input name={'title'} placeholder={"عنوان دسته"}
                                className={"col-span-4 text-on-surface-light border border-outline-light rounded-[8px] "}/>
-                        <textarea name={'content'} minLength={12} placeholder={"متن"}
+                        <input name={'slug'} placeholder={"slug"}
+                               className={"col-span-4 text-on-surface-light border border-outline-light rounded-[8px] "}/>
+                        <textarea name={'content'} minLength={12} placeholder={"توضیحات"}
                                   className={"h-[400px] col-span-12 text-on-surface-light border border-outline-light rounded-[8px] "}/>
                         {/*<form action={createInvoice} method="post">*/}
-                        <input className={"border border-primary-light text-primary-light rounded-full px-4 h-[40px]"} name="file" type="file" multiple={false}/>
-
+                        <input className={"border border-primary-light text-primary-light rounded-full px-4 h-[40px]"}
+                               name="file" type="file" multiple={false}/>
+                       <div>
+                        <label className={"font-medium text-title-small"}>
+                            دسته بندی مادر
+                        </label>
+                        <select name={"top-category"} dir={"rtl"} className={"rounded-full col-span-4"}>
+                            <option>-</option>
+                            {data.map(item => <option key={item.id} value={item.id}>{item.title}</option>)}
+                        </select>
+                       </div>
                         {/*</form>*/}
                         <div className={"flex col-span-12 justify-end"}>
                             <Button type={"submit"} icon={"save"} variant={"filled"}>

@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@backend/*": ["./src/app/(backend)/*"],
+      "@m3/*": ["./src/components/m3_design/*"],
+      "@admin/*": ["./src/components/admin/*"],
+      "@website/*": ["./src/components/website/*"]
     }
   }
 }

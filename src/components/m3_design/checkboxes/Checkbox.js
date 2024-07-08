@@ -2,7 +2,7 @@
 import {useState} from "react";
 import Icon from "@m3/assets/icons/Icon";
 
-export default function Checkbox({isCheck, isDisabled, onChange, isIndeterminate, color, label}) {
+export default function Checkbox({value,name,isCheck, isDisabled, onChange, isIndeterminate, color, label}) {
     const [check, setCheck] = useState(isCheck || false)
     const [indeterminate, setIndeterminate] = useState(isIndeterminate || false)
     let classes = ""
@@ -29,7 +29,7 @@ export default function Checkbox({isCheck, isDisabled, onChange, isIndeterminate
 
                 onChange && onChange(check)
             }} className={"cursor-pointer flex items-center"}>
-                <button
+                <button type={"button"}
                     className={`checkbox-container group`}>
                     <div className={`checkbox ${isDisabled ? "checkbox-disable" : classes}`}>
                         <div className={`checkbox-state-layer `}>
@@ -48,8 +48,9 @@ export default function Checkbox({isCheck, isDisabled, onChange, isIndeterminate
                 </label>}
 
 
-                <input disabled={isDisabled} value={check} data-indeterminate={indeterminate} className={"hidden"}
-                       type={"checkbox"}/>
+                {check&&<input name={name ? name : ""} disabled={isDisabled} value={check ? value : ""}
+                        data-indeterminate={indeterminate}
+                        type={"hidden"}/>}
             </div>
         </>
     )

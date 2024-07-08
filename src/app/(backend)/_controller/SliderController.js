@@ -1,5 +1,4 @@
 import {db} from '../_helper/db'
-import res from "../../../font-vs";
 const Slider = db.Slider
 
 async function index() {
@@ -34,8 +33,9 @@ async function index() {
     // Slider.find({}).exec(function (err,docs ) {
     //    return docs
     // })
-    return await Slider.find({}).populate('image')
 
+    // console.log(slides)
+    return JSON.stringify(await Slider.find({}).populate('image'))
     // try {
     // Slider.find(filterObject).skip((resPerPage * page) - resPerPage)
     //     .limit(resPerPage).sort({'createdAt': -1}).populate('tags').populate('thumbnail').exec(function (err, docs) {

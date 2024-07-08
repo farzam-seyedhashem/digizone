@@ -1,5 +1,5 @@
 import Image from 'next/legacy/image'
-import {API} from "../config";
+// import {API} from "../config";
 
 export const convertContentType = (item, i) => {
     // console.log(item)
@@ -8,13 +8,13 @@ export const convertContentType = (item, i) => {
         case "header":
             const Htag = `h${data.level}`
             return <Htag id={"h-" + i}
-                         className={"text-3xl -mt-8 pt-24 mb-10 font-black text-on-background-light dark:text-on-background-dark sm:text-[57px] leading-[48px] sm:leading-[64px] tracking-[.1px]"}
+                         className={"text-headline-medium -mt-8 pt-24 mb-4 font-black text-on-background-light dark:text-on-background-dark"}
                          dangerouslySetInnerHTML={{__html: item.data.text}}/>
             break;
         case "paragraph":
             return item.data.text === "<br>wlknfl</br>" ?
                 <div className={"mb-4 leading-8 text-on-surface-light dark:text-on-surface-dark"}/> :
-                <p className="text-on-surface-variant-light  dark:text-on-surface-variant-dark max-w-3xl leading-8 mb-4"
+                <p className="text-on-surface-variant-light text-body-large  dark:text-on-surface-variant-dark max-w-3xl leading-8 mb-4"
                    dangerouslySetInnerHTML={{__html: item.data.text}}></p>
             break;
         case "list":
@@ -59,13 +59,13 @@ export const convertContentType = (item, i) => {
                 </div>
             )
             break;
-        case "image":
-            return <div
-                className={`w-full mb-10 rounded-lg overflow-hidden ${data.withBackground ? "bg-gray-50" : ""} ${data.withBorder ? "border border-black border-opacity-10" : ""} ${data.stretched ? "w-full h-auto relative" : "w-fit-content"}`}>
-                <Image width={data.stretched ? 1920 : 1920} height={data.stretched ? 1080 : 1080}
-                       objectFit={data.stretched ? "cover" : 'cover'}
-                       layout={data.stretched ? 'responsive' : 'responsive'} src={item.data.file.url}/></div>
-            break;
+        // case "image":
+        //     return <div
+        //         className={`w-full mb-10 rounded-lg overflow-hidden ${data.withBackground ? "bg-gray-50" : ""} ${data.withBorder ? "border border-black border-opacity-10" : ""} ${data.stretched ? "w-full h-auto relative" : "w-fit-content"}`}>
+        //         <Image width={data.stretched ? 1920 : 1920} height={data.stretched ? 1080 : 1080}
+        //                objectFit={data.stretched ? "cover" : 'cover'}
+        //                layout={data.stretched ? 'responsive' : 'responsive'} src={item.data.file.url}/></div>
+        //     break;
     }
 }
 

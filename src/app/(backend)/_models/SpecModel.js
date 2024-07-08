@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+
 const Schema = mongoose.Schema;
 let SpecSchema = new Schema({
     title: {
@@ -10,8 +11,13 @@ let SpecSchema = new Schema({
         ref: 'Category',
         required: true,
     }],
-    values: [{type:String}],
-    isShowFilter:{
+    values: [
+        {
+
+            title: String
+        }
+    ],
+    isShowFilter: {
         type: Boolean,
         default: false
     }
@@ -22,6 +28,7 @@ let SpecSchema = new Schema({
         virtuals: true,
     }
 });
+
 export function SpecModel() {
     return mongoose.models.Spec || mongoose.model('Spec', SpecSchema);
 }

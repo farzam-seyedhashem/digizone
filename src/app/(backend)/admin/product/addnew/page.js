@@ -1,18 +1,24 @@
 import Button from "@m3/buttons/Button";
-import {store} from '@backend/_controller/ProductSpecController'
+import {store} from '@backend/_controller/ProductController'
 import {redirect} from 'next/navigation'
 import {revalidateTag} from "next/cache";
 import {store as storeImage} from "@backend/_controller/ImageController";
-import {index} from "@backend/_controller/CategoryController";
+import {index as categoryIndex} from "@backend/_controller/CategoryController";
+import {index as specIndex} from "@backend/_controller/ProductSpecController";
+import Specification from "@admin/product/Specification";
+import {spec} from "node:test/reporters";
+import {cache} from "react";
+import Editor from "@admin/Editor";
 
-async function getCategories() {
+const getCategories = cache(async () => {
     'use server'
-    return await index()
-}
+    return JSON.parse(await categoryIndex())
+})
 
 export default async function Page() {
     const getCategoriesList = getCategories()
     const [categories] = await Promise.all([getCategoriesList])
+    console.log(categories)
 
     async function createInvoice(formData) {
         'use server'
@@ -21,16 +27,21 @@ export default async function Page() {
         // console.log(formData);
         // const cat = formData.getAll('categories[]')
         // console.log("-------------",cat,formData,typeof cat)
+        let specs = []
+        formData.getAll('specs').map(item => specs.push(JSON.parse(item)))
         const rawFormData = {
             title: formData.get('title'),
-            categories: formData.getAll('categories'),
-            values: formData.get('values').split("-"),
-            isShowFilter: formData.get('isShowFilter'),
+            slug: formData.get('slug'),
+            category: formData.get('category'),
+            spec: specs,
+            price: formData.get('price'),
+            content: formData.get('content'),
         }
+        console.log(rawFormData)
         // console.log(rawFormData)
         await store(rawFormData)
         // revalidateTag("blogPosts")
-        redirect(`/admin/product-spec`)
+        redirect(`/admin/product`)
         // console.log();
         // let newNews = new Blog(rawFormData);
         // await newNews.save();
@@ -46,26 +57,19 @@ export default async function Page() {
                         افزودن مقاله
                     </h1>
                     <form action={createInvoice} className={"mt-4 gap-4 grid grid-cols-12 "}>
-                        <input required name={'title'} placeholder={"عنوان مقاله"}
+                        <input required name={'title'} placeholder={"عنوان محصول"}
                                className={"col-span-4 text-on-surface-light border border-outline-light rounded-[8px] "}/>
-                        <div className={"block col-span-12 space-y-2"}>
-                            {categories.map(category =>
-                                <div key={category.id} className={"flex items-center"}>
-                                    <input id={category.id} value={category.id} name={"categories"}
-                                           type={"checkbox"}/>
-                                    <label className={"mr-2"} htmlFor={category.id}>{category.title}</label>
-                                </div>
-                            )}
-                        </div>
+                        <input required name={'slug'} placeholder={"slug"}
+                               className={"col-span-4 text-on-surface-light border border-outline-light rounded-[8px] "}/>
+                        <input required name={'price'} placeholder={"قیمت"}
+                               className={"col-span-4 text-on-surface-light border border-outline-light rounded-[8px] "}/>
 
-                        <div className={"flex items-center"}>
-                            <input id={"showfilter"} value={true} name={"isShowFilter"}
-                                   type={"checkbox"}/>
-                            <label className={"mr-2"} htmlFor={"showfilter"}>{"نمایش به عنوان فیلتر"}</label>
+                        <div className={"col-span-8"}>
+                            <Specification categories={categories}/>
                         </div>
-                        <textarea required name={'values'} placeholder={"متن"}
-                                  className={"h-[400px] col-span-12 text-on-surface-light border border-outline-light rounded-[8px] "}/>
-
+                        <div className={"col-span-12"}>
+                            <Editor name={"content"}/>
+                        </div>
 
                         <div className={"flex col-span-12 justify-end"}>
                             <Button type={"submit"} icon={"save"} variant={"filled"}>

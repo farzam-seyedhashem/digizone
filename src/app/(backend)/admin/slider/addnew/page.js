@@ -1,6 +1,6 @@
 import Button from "@m3/buttons/Button";
-import {store} from '@/app/_controller/SliderController'
-import {store as storeImage} from '@/app/_controller/ImageController'
+import {store} from '@backend/_controller/SliderController'
+import {store as storeImage} from '@backend/_controller/ImageController'
 import {redirect} from 'next/navigation'
 import {revalidateTag} from "next/cache";
 
@@ -32,14 +32,19 @@ export default function Page() {
                         افزودن اسلاید جدید
                     </h1>
                     <form method={"post"} action={createInvoice} className={"mt-4 gap-4 grid grid-cols-12 "}>
-                        <input name={'title'} placeholder={"عنوان مقاله"}
+                        <input name={'title'} placeholder={"عنوان اسلاید"}
                                className={"col-span-4 text-on-surface-light border border-outline-light rounded-[8px] "}/>
-                        <textarea name={'content'} minLength={12} placeholder={"متن"}
+                        <textarea name={'content'} minLength={12} placeholder={"متن اسلاید"}
                                   className={"h-[400px] col-span-12 text-on-surface-light border border-outline-light rounded-[8px] "}/>
-                        {/*<form action={createInvoice} method="post">*/}
-                        <input className={"border border-primary-light text-primary-light rounded-full px-4 h-[40px]"} name="file" type="file" multiple={false}/>
+                        <div className={"col-span-12"}>
+                            <Button icon={"upload"} variant={"outlined"} className={"flex w-fit"} htmlFor={"imageFile"}
+                                    component={"label"} type={"button"}>
+                                آپلود عکس
+                            </Button>
+                            <input required className={"hidden"} id={"imageFile"}
+                                   name="file" type="file" multiple={false}/>
 
-                        {/*</form>*/}
+                        </div>
                         <div className={"flex col-span-12 justify-end"}>
                             <Button type={"submit"} icon={"save"} variant={"filled"}>
                                 ذخیره

@@ -1,13 +1,13 @@
 import Link from "next/link";
 import IconButton from "@/components/m3_design/icon_buttons/IconButton";
 import Button from "@m3/buttons/Button";
-import {index,destroy} from "@backend/_controller/BlogController";
+import {index,destroy} from "@backend/_controller/CategoryController";
 import {redirect} from "next/navigation";
 import Image from "next/image";
 
 async function getData() {
     'use server'
-    return await index()
+    return JSON.parse(await index())
 }
 
 export default async function Page() {
@@ -16,8 +16,9 @@ export default async function Page() {
     async function deleteData(formData) {
         'use server'
         await destroy(formData.get("id"))
-        redirect(`/admin/blog`)
+        redirect(`/admin/product-category`)
     }
+
     return (
         <div className={"bg-surface-light dark:bg-surface-dark container mx-auto h-screen "}>
             <div
@@ -25,7 +26,7 @@ export default async function Page() {
                 <h1 className={"text-title-medium font-bold text-on-surface-light"}>
                     مقالات
                 </h1>
-                <Link href={"/admin/blog/addnew"}>
+                <Link href={"/admin/product-category/addnew"}>
                     <Button variant={"filled"} icon={"add"} type={"filled"}>
                         ایجاد
                     </Button>
@@ -55,7 +56,7 @@ export default async function Page() {
                                 </thead>
                                 <tbody
                                     className={"*:text-on-surface-variant-light dark:*:text-on-surface-variant-dark dark:hover:*:text-on-secondary-container-dark hover:*:text-on-secondary-container-light dark:hover:*:bg-secondary-container-dark hover:*:bg-secondary-container-light  *:border-b dark:*:border-outline-variant-dark *:border-outline-variant-light"}>
-                                {data.map(post => <tr key={post.id} className={"*:px-4 *:h-[56px] "}>
+                                {data.length>0 && data.map(post => <tr key={post.id} className={"*:px-4 *:h-[56px] "}>
                                     <td className={"font-medium"}>
                                         <Image className={"rounded-full"} width={40} height={40} alt={''}
                                                src={`/data${post.thumbnail.url}`}/>
@@ -69,7 +70,7 @@ export default async function Page() {
                                     <td>{new Date(post.updatedAt).toLocaleDateString("fa-IR")}</td>
                                     <td>
                                         <div className={"flex items-center space-x-reverse space-x-1 justify-end"}>
-                                            <Link href={`/admin/blog/edit/${post.id}`}>
+                                            <Link href={`/admin/product-category/${post._id}`}>
                                                 <IconButton>
                                                     edit
                                                 </IconButton>

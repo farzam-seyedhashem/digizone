@@ -1,10 +1,13 @@
 import React from "react";
 import Image from 'next/legacy/image'
 import Link from 'next/link'
-import Typography from "./assets/Typography";
-import {ImageBaseURL} from "@/config";
-import ConvertDate from "@/helpers/ConvertDate";
-import TruncText from "@/helpers/TruncText";
+import Typography from "@m3/assets/typography/Typography";
+import ConvertDate from "@/app/(frontend)/_helper/ConvertDate";
+import TruncText from "@/app/(frontend)/_helper/TruncText";
+import {ContentConvertor} from "@/app/(frontend)/_helper/ContentConvertor";
+// import {ImageBaseURL} from "@/config";
+// import ConvertDate from "@/helpers/ConvertDate";
+// import TruncText from "@/helpers/TruncText";
 
 export default function PostCardHorizontal(props) {
     const {post,id, isHorizontal} = props
@@ -22,7 +25,7 @@ export default function PostCardHorizontal(props) {
     //     }
     // })
     return (
-        <Link href={`/post/${id}`}>
+        <Link href={`/post/${post.slug}`}>
 
             <div
                 className={" w-full h-full p-4 relative bg-surface-container-highest-light dark:bg-surface-container-highest-dark rounded-[12px] overflow-hidden"}>
@@ -34,12 +37,13 @@ export default function PostCardHorizontal(props) {
                         </Typography>
                         <p
                             className={"text-label-medium font-medium flex items-center w-fit rounded-[8px]   mt-1  whitespace-normal text-primary-light dark:text-primary-dark"}>
-                            {post.category.data.attributes.title}
+                            {/*{post.category.data.attributes.title}*/}
                         </p>
                         <p className={"text-body-large  flex items-center w-fit rounded-[8px]   mt-2  whitespace-normal text-on-surface-variant-light dark:text-on-surface-variant-dark"}>
                             <TruncText charNumber={140}>
-                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
-                            {/*{pContent}*/}
+                                {ContentConvertor(post?.content || post?.desc || post?.descr || post?.description)}
+
+                                {/*{pContent}*/}
                             </TruncText>
                         </p>
 
@@ -47,7 +51,7 @@ export default function PostCardHorizontal(props) {
                     <div className={"h-[100px] w-[100px]"}>
                          <Image quality={100} layout={'responsive'} width={720} height={720}
                                    className="rounded-[12px] w-full object-cover"
-                                   src= {ImageBaseURL + post.thumbnail.data.attributes.url} alt=""/>
+                                   src= {`/data${post.thumbnail.url}`} alt=""/>
                     </div>
                 </div>
                 <div className={"flex mt-4 justify-between"}>
@@ -59,7 +63,6 @@ export default function PostCardHorizontal(props) {
                             </p>
                             <p className={`text-label-small sm:text-label-medium  text-on-surface-light dark:text-on-surface-dark`}>
                                <ConvertDate date={post.createdAt}/>
-
                             </p>
                         </div>
 

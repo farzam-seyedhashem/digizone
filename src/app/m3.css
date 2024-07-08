@@ -25,11 +25,11 @@ Badge Classes
 Material Design Version 3
 Bottom App Bars Classes
  */
-.bottom-app-bar-container {
-    @apply pr-4 flex items-center pl-1 py-3 h-[80px] bg-surface-container-light dark:bg-surface-container-dark w-full
+.bottom-apl-bar-container {
+    @apply pl-4 flex items-center pr-1 py-3 h-[80px] bg-surface-container-light dark:bg-surface-container-dark w-full
 }
 
-.bottom-app-bar-container .link-container {
+.bottom-apl-bar-container .link-container {
     @apply flex flex-grow space-x-2
 }
 
@@ -48,7 +48,7 @@ Button Classes
 }
 
 .button-with-icon .button-state-layer {
-    @apply pl-4 pr-6 h-[40px]
+    @apply pr-4 pl-6 h-[40px]
 }
 
 .button-without-icon .button-state-layer {
@@ -56,7 +56,7 @@ Button Classes
 }
 
 .button-with-icon .icon {
-    @apply mr-2
+    @apply ml-2
 }
 
 .button-state-layer {
@@ -127,7 +127,7 @@ FAB & Extended FAB Button Classes
 }
 
 .fab-container .fab-text {
-    @apply text-label-large ml-3
+    @apply text-label-large mr-3
 }
 
 .fab-state-layer {
@@ -165,7 +165,7 @@ FAB & Extended FAB Button Classes
 }
 
 .ex-fab .fab-state-layer {
-    @apply rounded-[16px] py-[16px] pr-[20px] pl-[16px]
+    @apply rounded-[16px] py-[16px] pl-[20px] pr-[16px]
 }
 
 /*fab style in different colors*/
@@ -400,7 +400,7 @@ Checkbox Classes
 }
 
 .divider-horizontal-inset {
-    @apply w-[calc(100%_-_16px)] ml-auto border-t;
+    @apply w-[calc(100%_-_16px)] mr-auto border-t;
 }
 
 /*------------------------------------------*/
@@ -410,23 +410,23 @@ Material Design Version 3
 Snackbar Classes
 */
 .snackbar {
-    @apply fixed pl-[16px] flex items-center bg-inverse-surface-light dark:bg-inverse-surface-dark text-inverse-on-surface-light dark:text-inverse-on-surface-dark bottom-6
+    @apply fixed pr-[16px] flex items-center bg-inverse-surface-light dark:bg-inverse-surface-dark text-inverse-on-surface-light dark:text-inverse-on-surface-dark bottom-6
 }
 
 .snackbar-with-icon {
-    @apply pr-0
+    @apply pl-0
 }
 
 .snackbar-standard {
-    @apply pr-4
+    @apply pl-4
 }
 
 .snackbar-with-action {
-    @apply pr-2
+    @apply pl-2
 }
 
 .snackbar-with-action {
-    @apply pr-2
+    @apply pl-2
 }
 
 .snackbar-left {
@@ -454,7 +454,7 @@ Snackbar Classes
 }
 
 .snackbar-action {
-    @apply ml-1
+    @apply mr-1
 }
 
 .snackbar-message {

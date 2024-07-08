@@ -1,12 +1,13 @@
 import {db} from '../_helper/db'
 import fs from 'fs';
-import { pipeline } from 'stream';
-import { promisify } from 'util';
+import {pipeline} from 'stream';
+import {promisify} from 'util';
+
 const pump = promisify(pipeline);
 
 const Image = db.Image
-import uploadFile from '@/app/_helper/UploadImage'
-import multer from "multer";
+// import uploadFile from '@/app/_helper/UploadImage'
+// import multer from "multer";
 
 // import {ImageModel} from "@/app/_models/ImageModel";
 async function index() {
@@ -75,47 +76,17 @@ async function store(file) {
     // const file =
 
     try {
-        const filePath = `./public/data/images/${file.name}`;
+        const date = Date.now()
+        const filePath = `./public/data/images/${date+file.name}`;
         await pump(file.stream(), fs.createWriteStream(filePath));
-        // console.log(file)
-        // let uploadFile = multer({
-        //     storage: storage,
-        //     // limits: { fileSize: maxSize },
-        // }).single("file");
-        // let storage = multer.diskStorage({
-        //     destination: (req, file, cb) => {
-        //         if (file.type === 'video/mp4') {
-        //             cb(null, "../../../public/data/videos/");
-        //         } else
-        //             cb(null, "../../../public/data/images/");
-        //     },
-        //     filename: (req, file, cb) => {
-        //         cb(null, file.name);
-        //     }
-        // })
-        // const upload = multer({storage: storage})
-        // upload.single("File");
-        // console.log(file)
-        // await uploadFile(file);
-        if (file === undefined) {
-            console.log("errrr")
-            // images
-            // throw new Error()
-            // return;
-            // res.status(400).send({message: "Please upload a file!"});
-        } else {
-            // console.log(req)
-            // console.log(req.body)
-            var image = new Image({
-                title: file.name,
-                url: file.type === 'video/mp4' ? '/videos/' + file.name : '/images/' + file.name,
-                // alt: {value: body.alt, lang: req.body.lang}
-                alt: ""
-                // like: body.like,
-            });
-            await image.save();
-            return image;
-        }
+        var image = new Image({
+            title: file.name,
+            url: file.type === 'video/mp4' ? '/videos/' + date+file.name : '/images/' + date+file.name,
+            alt: ""
+        });
+        await image.save();
+        return image;
+
     } catch (err) {
         console.log(err)
         if (err.code === "LIMIT_FILE_SIZE") {

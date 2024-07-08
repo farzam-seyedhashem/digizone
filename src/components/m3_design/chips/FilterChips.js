@@ -1,3 +1,4 @@
+'use client'
 import Icon from "@m3/assets/icons/Icon";
 
 export default function FilterChips({isChecked, onChange,label}) {

@@ -22,11 +22,24 @@ let ProductSchema = new Schema({
                 ref: 'Spec',
             },
             value:{
-                type: String,
+                type: mongoose.Schema.Types.ObjectId,
+
             }
         }
     ],
+    thumbnail:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Image',
+    },
+    images:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Image',
+    }],
     content: {
+        type: String,
+        default: null,
+    },
+    price: {
         type: String,
         default: null,
     },
@@ -43,11 +56,12 @@ let ProductSchema = new Schema({
         default: null,
     },
 
-}, {timestamps: true}, {
+}, {timestamps: true,strict: true}, {
     toJSON: {
         virtuals: true,
     }
 });
+
 export function ProductModel() {
     return mongoose.models.Product || mongoose.model('Product', ProductSchema);
 }
