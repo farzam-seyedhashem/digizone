@@ -1,3 +1,4 @@
+'use client'
 import React, {useEffect, useMemo, useState} from "react";
 
 export default function TextField({label,className,onChange,defaultValue,id}) {

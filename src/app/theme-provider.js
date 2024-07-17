@@ -5,7 +5,7 @@ import {createContext, ReactElement, useContext, useEffect, useState} from 'reac
 export const ThemeContext = createContext({})
 export function ThemeProvider({children}) {
     const [isDarkTheme, setIsDarkTheme] = useState(true);
-    const [colorSystem, setColorSystem] = useState('green-theme-color');
+    const [colorSystem, setColorSystem] = useState('default-theme-color');
     useEffect(() => initialThemeHandler());
 
     function isLocalStorageEmpty() {
@@ -14,7 +14,7 @@ export function ThemeProvider({children}) {
 
     function initialThemeHandler() {
         if (isLocalStorageEmpty()) {
-            localStorage.setItem("theme", JSON.stringify({isDark: true, colorSystem: 'green-theme-color'}));
+            localStorage.setItem("theme", JSON.stringify({isDark: true, colorSystem: 'default-theme-color'}));
             document.querySelector("body").classList.add(colorSystem)
             document.querySelector("body").classList.add("dark");
             setIsDarkTheme(true);

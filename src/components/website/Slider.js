@@ -101,7 +101,7 @@ export default  function Slider({slidesData}) {
                     <h2 className={"text-title-large text-on-secondary-container-light dark:text-on-secondary-container-dark mb-2 font-black"}>
                         {slidesData[selected].title}
                     </h2>
-                    <p className={"text-on-secondary-container-light dark:text-secondary-container-dark text-body-large font-normal"}>
+                    <p className={"text-on-secondary-container-light dark:text-on-secondary-container-dark text-body-large font-normal"}>
                         {slidesData[selected].description}
                     </p>
                 </div>
