@@ -37,7 +37,7 @@ export default async function Home() {
         <main className=" bg-surface-light dark:bg-surface-dark">
 
             <div className={"md:px-4 min-h-screen pt-6  mx-auto"}>
-                <Slider slidesData={slides}/>
+                {/*<Slider slidesData={slides}/>*/}
                 <div className={"mt-12 flex items-center"}>
                     {categories.map((category) => (
                         <div className={"px-6"} key={category._id}>
