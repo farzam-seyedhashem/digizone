@@ -2,6 +2,10 @@
   "name": "digizone",
   "version": "0.1.0",
   "private": true,
+  "instances": 1,
+  "out_file": "/dev/null",
+  "error_file": "/dev/null",
+  "cron_restart": '0 0 * * *',
   "scripts": {
     "dev": "next dev",
     "build": "next build",
