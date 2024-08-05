@@ -1,7 +1,7 @@
 import Link from "next/link";
-import IconButton from "../../../components/m3_design/icon_buttons/IconButton";
+import IconButton from "@m3/icon_buttons/IconButton";
 import Button from "@m3/buttons/Button";
-import {index,store} from "@/app/_controller/ImageController"
+import {index,store} from "@backend/_controller/ImageController"
 import {revalidateTag} from "next/cache";
 import {redirect} from "next/navigation";
 // import {store} from "@/app/_controller/BlogController";

@@ -1,5 +1,5 @@
 import Button from "@m3/buttons/Button";
-import {store} from '@/app/_controller/BlogController'
+import {store} from '@/app/(backend)/_controller/BlogController'
 import { redirect } from 'next/navigation'
 import {revalidateTag} from "next/cache";
 
