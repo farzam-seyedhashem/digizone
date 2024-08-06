@@ -9,13 +9,13 @@ export default function Specification({categories, defData}) {
     const [specs, setSpecs] = useState(null);
     useMemo(async () => {
         if (defData?.category?._id) {
-            const data = await fetch(`http://localhost:3000/api/specs/bycategory/${defData?.category?._id}`)
+            const data = await fetch(`https://digizone.com/api/specs/bycategory/${defData?.category?._id}`)
             setSpecs(await data.json())
         }
     }, [defData]);
     const onChangeCategory = async (id) => {
         console.log(id)
-        const data = await fetch(`http://localhost:3000/api/specs/bycategory/${id}`)
+        const data = await fetch(`https://digizone.com/api/specs/bycategory/${id}`)
         setSelectedCategory(id)
         setSpecs(await data.json())
     }

@@ -17,7 +17,7 @@ console.log(newImage)
     const saveImage = async (file) => {
         const formdata = new FormData();
         formdata.append("file", file);
-        const res = await fetch("http://localhost:3000/api/upload", {
+        const res = await fetch("https://digizone.com/api/upload", {
             method: "POST",
             body: formdata,
         })
