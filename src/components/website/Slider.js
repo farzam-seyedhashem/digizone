@@ -12,20 +12,20 @@ export default  function Slider({slidesData}) {
         setSelected(selected + 1);
     };
     useEffect(() => {
-        if (currentTimeOut) {
-            clearTimeout(currentTimeOut);
-        }
-        console.log(1)
-        let i = setTimeout(async function () {
-            if (selected === slidesData.length - 1) {
-                setSelected(0)
-            } else {
-                await nextStep()
+        if (slidesData.length > 0) {
+            if (currentTimeOut) {
+                clearTimeout(currentTimeOut);
             }
+            let i = setTimeout(async function () {
+                if (selected === slidesData.length - 1) {
+                    setSelected(0)
+                } else {
+                    await nextStep()
+                }
 
-        }, 5000)
-        setCurrentTimeOut(i)
-
+            }, 5000)
+            setCurrentTimeOut(i)
+        }
     }, [selected]);
     return (
         <div className={"w-full flex items-center"}>
