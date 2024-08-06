@@ -60,7 +60,7 @@ export default function AboutUsPage(props) {
 
             <div className={"mb-10 grid grid-cols-12 gap-6"}>
                 <div
-                    className={"md:w-[550px] w-full overflow-hidden h-[580px] rounded-[24px] relative col-span-12 md:col-span-4 bg-surface-container-light dark:bg-surface-container-dark"}>
+                    className={" w-full overflow-hidden h-[580px] rounded-[24px] relative col-span-12 md:col-span-4 bg-surface-container-light dark:bg-surface-container-dark"}>
                     <h3 className={"text-on-surface-light font-bold py-6 px-6 dark:text-on-surface-dark text-display-medium md:text-display-large"}>
 
                             <span className={"text-primary-light block dark:text-primary-dark"}>
@@ -110,7 +110,7 @@ export default function AboutUsPage(props) {
                     </p>
                 </div>
                 <div
-                    className={"md:w-[550px] w-full overflow-hidden h-[580px] rounded-[24px] relative col-span-12 md:col-span-4 bg-surface-container-light dark:bg-surface-container-dark"}>
+                    className={" w-full overflow-hidden h-[580px] rounded-[24px] relative col-span-12 md:col-span-4 bg-surface-container-light dark:bg-surface-container-dark"}>
                     <h3 className={"text-on-surface-light font-bold py-6 px-6 dark:text-on-surface-dark text-display-medium md:text-display-large"}>
                         ورود به عرصه
                         <span className={"text-primary-light block dark:text-primary-dark"}>
