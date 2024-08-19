@@ -17,7 +17,7 @@ export default function UploadImage({defImage, label, name}) {
     const saveImage = async (file) => {
         const formdata = new FormData();
         formdata.append("file", file);
-        const API = process.env.STATUS === "production" ? process.env["ProductionURL"] : process.env.DevURL
+        const API = "https://digizoneshop.com"
         const res = await fetch(`${API}/api/upload`, {
             method: "POST",
             body: formdata,
