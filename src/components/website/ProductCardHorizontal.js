@@ -1,4 +1,5 @@
-import React from "react";
+'use client'
+import React, {useEffect} from "react";
 import Image from 'next/legacy/image'
 import Link from 'next/link'
 import Typography from "@m3/assets/typography/Typography";
@@ -9,6 +10,9 @@ import Icon from "@m3/assets/icons/Icon";
 
 export default function ProductCardHorizontal(props) {
     const {product, isHorizontal} = props
+    useEffect(() => {
+        console.log(product)
+    }, []);
     // const product = item?.attributes
     return (
         <Link href={`/product/${product.slug}`}>
@@ -32,12 +36,12 @@ export default function ProductCardHorizontal(props) {
                         <div className={"row-span-1 col-span-2 overflow-hidden relative w-full "}>
                             <Image quality={100} layout={'fill'} width={1080} height={720}
                                    className=" w-full object-cover"
-                                   src={"/data" + product.thumbnail.url} alt=""/>
+                                   src={"/data" + product?.thumbnail.url} alt=""/>
                         </div>
                         {product.images[0] && <div className={"row-span-1 col-span-1 overflow-hidden relative w-full "}>
                             <Image quality={100} layout={'fill'}
                                    className="  w-full object-cover"
-                                   src={"/data" + product.images[0].url} alt=""/>
+                                   src={"/data" + product?.images[0].url} alt=""/>
                         </div>}
                         {product.images[1] && <div className={"row-span-1 col-span-1 overflow-hidden relative w-full "}>
                             <Image quality={100} layout={'fill'}
