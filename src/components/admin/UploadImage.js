@@ -18,8 +18,7 @@ export default function UploadImage({defImage, label, name}) {
         const formdata = new FormData();
         formdata.append("file", file);
         const API = process.env.STATUS === "production" ? process.env["ProductionURL"] : process.env.DevURL
-       console.log("apiiiii",process.env)
-               const res = await fetch(`${API}/api/upload`, {
+        const res = await fetch(`${API}/api/upload`, {
             method: "POST",
             body: formdata,
         })
@@ -29,7 +28,7 @@ export default function UploadImage({defImage, label, name}) {
         <div>
             <div className={"flex items-center space-x-reverse space-x-4"}>
                 {image ? <div className={"relative w-[120px] h-[120px] rounded-[16px] overflow-hidden"}>
-                    <Image layout={"fill"} src={"/data" + image.url} alt={""}/>
+                    <Image layout={"fill"} src={(process.env.STATUS === "production" ? process.env["ProductionURL"] : process.env.DevURL) + image.url} alt={""}/>
                 </div> : <div
                     className={"flex items-center justify-center rounded-[16px] bg-surface-container-highest-light dark:bg-surface-container-highest-dark w-[120px] h-[120px] "}>
                     <Icon>
