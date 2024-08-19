@@ -7,7 +7,7 @@ import Icon from "@m3/assets/icons/Icon";
 export default function Specification({categories, defData}) {
     const [selectedCategory, setSelectedCategory] = useState(defData ? defData?.category ? defData.category._id : null : null);
     const [specs, setSpecs] = useState(null);
-    const API = process.env.STATUS === "production" ? process.env["ProductionURL"] : process.env["DevURL"]
+    const API = "https://digizoneshop.com"
 
     useMemo(async () => {
         if (defData?.category?._id) {
