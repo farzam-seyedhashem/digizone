@@ -21,7 +21,9 @@ export default function UploadMultipleImage({defImages, label, name}) {
     const saveImage = async (file) => {
         const formdata = new FormData();
         formdata.append("file", file);
-        const res = await fetch("https://digizone.com/api/upload", {
+        const API = process.env.STATUS === "production" ? process.env["ProductionURL"] : process.env["DevURL"]
+
+        const res = await fetch(`${API}/api/upload`, {
             method: "POST",
             body: formdata,
         })

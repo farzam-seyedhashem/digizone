@@ -4,7 +4,6 @@ import Button from "@m3/buttons/Button";
 import {index,destroy} from "@backend/_controller/BlogController";
 import {redirect} from "next/navigation";
 import Image from "next/image";
-import {json} from "node:stream/consumers";
 
 async function getData() {
     'use server'

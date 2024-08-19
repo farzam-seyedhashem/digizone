@@ -97,7 +97,7 @@ export default  function Slider({slidesData}) {
             <div className={"relative  md:h-[720px] h-[440px] w-full rounded-[24px] overflow-hidden "}>
                 <Image objectFit={"cover"} fill src={`/data${slidesData[selected].image.url}`} alt={"s"}/>
                 <div
-                    className={"w-5/12 bg-secondary-container-light dark:bg-secondary-container-dark rounded-[24px] px-8 py-8 absolute right-6 bottom-6"}>
+                    className={"md:w-5/12 w-11/12 bg-secondary-container-light dark:bg-secondary-container-dark rounded-[24px] px-8 py-8 absolute bottom-4 right-1/2 transform translate-x-1/2 md:translate-x-0  md:right-6 md:bottom-6"}>
                     <h2 className={"text-title-large text-on-secondary-container-light dark:text-on-secondary-container-dark mb-2 font-black"}>
                         {slidesData[selected].title}
                     </h2>

@@ -36,7 +36,7 @@ export default async function Home() {
     return (
         <main className=" bg-surface-light dark:bg-surface-dark">
 
-            <div className={"md:px-4 min-h-screen pt-6  mx-auto"}>
+            <div className={"px-4  min-h-screen pt-6  mx-auto"}>
                 <Slider slidesData={slides}/>
                 <div className={"mt-12 flex items-center"}>
                     {categories.map((category) => (
@@ -59,7 +59,7 @@ export default async function Home() {
                             className={"mt-1 mb-4 font-medium dark:text-on-surface-variant-dark text-on-surface-variant-light  "}>
                     لیست آخرین محصولات در دیجی زون
                 </Typography>
-                <div className={"grid grid-cols-4 gap-4"}>
+                <div className={"grid md:grid-cols-4 grid-cols-1 gap-4"}>
                 {products.map(product=><ProductCardHorizontal key={product._id} product={product}/>)}
                 </div>
                 <Typography type={"h2"}
@@ -70,8 +70,9 @@ export default async function Home() {
                             className={"mt-1 mb-4 font-medium dark:text-on-surface-variant-dark text-on-surface-variant-light  "}>
                     لیست آخرین مقالات در دیجی زون
                 </Typography>
-                <div className={"grid grid-cols-4  gap-4"}>
+                <div className={"grid grid-cols-1 md:grid-cols-4 gap-4"}>
                     {postsData.data.map((post, index) =>  <PostCardHorizontal post={post} key={index}/>)}
+
                 </div>
                 <Typography type={"h2"}
                             className={"mt-10 text-display-small text-on-surface-light dark:text-on-surface-dark"}>

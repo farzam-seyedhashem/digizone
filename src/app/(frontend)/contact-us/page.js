@@ -90,19 +90,19 @@ export default function AboutUsPage(props) {
                             <td
                                 className={`px-6  font-medium border-r border-t border-surface-variant-light dark:border-surface-variant-dark py-4 font-normal text-on-surface-light dark:text-on-surface-dark dark:text-on-surface-dark`}>
                                 <a className={"md:py-0 py-[1px] px-1 inline-flex text-primary-light dark:text-primary-dark  hover:text-on-primary-container-light dark:hover:text-on-primary-container-dark hover:underline"}
-                                   href={"https://digizone.com/contact-us#"}>
+                                   href={"https://digizoneshop.com/contact-us#"}>
                                     فیسبوک
                                 </a>
                                 <a className={"md:py-0 py-[1px] px-1 inline-flex text-primary-light dark:text-primary-dark hover:text-on-primary-container-light dark:hover:text-on-primary-container-dark hover:underline"}
-                                   href={"https://digizone.com/contact-us#"}>
+                                   href={"https://digizoneshop.com/contact-us#"}>
                                     توییتر
                                 </a>
                                 <a className={"md:py-0 py-[1px] px-1 inline-flex text-primary-light dark:text-primary-dark hover:text-on-primary-container-light dark:hover:text-on-primary-container-dark hover:underline"}
-                                   href={"https://digizone.com/contact-us#"}>
+                                   href={"https://digizoneshop.com/contact-us#"}>
                                     اینستاگرام
                                 </a>
                                 <a className={"md:py-0 py-[1px] px-1 inline-flex text-primary-light dark:text-primary-dark hover:text-on-primary-container-light dark:hover:text-on-primary-container-dark hover:underline"}
-                                   href={"https://digizone.com/contact-us#"}>
+                                   href={"https://digizoneshop.com/contact-us#"}>
                                     یوتیوب
                                 </a>
                             </td>

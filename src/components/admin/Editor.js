@@ -6,7 +6,7 @@ import LinkTool from '@editorjs/link';
 import List from '@editorjs/list';
 import Table from '@editorjs/table';
 export default function Editor({name,defaultValue}) {
-    const [data,setData] = useState(JSON.parse(defaultValue)|| []);
+    const [data,setData] = useState(defaultValue ? JSON.parse(defaultValue) : []);
     useEffect(() => {
         const editor = new EditorJS({
             data:data,
