@@ -4,7 +4,7 @@ import Icon from "@m3/assets/icons/Icon";
 import Image from "next/image";
 import {useRef, useState} from "react";
 
-export default function UploadImage({defImage, label,name}) {
+export default function UploadImage({defImage, label, name}) {
     const [image, setImage] = useState(defImage || null);
     const inputRef = useRef()
     const handleImagesUpload = async (e) => {
@@ -12,13 +12,14 @@ export default function UploadImage({defImage, label,name}) {
         const file = inputRef.current.files
         let newImage = await saveImage(file[0])
         setImage(newImage)
-console.log(newImage)
+        console.log(newImage)
     }
     const saveImage = async (file) => {
         const formdata = new FormData();
         formdata.append("file", file);
-        const API = process.env.STATUS === "production" ? process.env["ProductionURL"] : process.env["DevURL"]
-        const res = await fetch(`${API}/api/upload`, {
+        const API = process.env.STATUS === "production" ? process.env["ProductionURL"] : process.env.DevURL
+       console.log("apiiiii",process.env)
+               const res = await fetch(`${API}/api/upload`, {
             method: "POST",
             body: formdata,
         })
@@ -27,12 +28,13 @@ console.log(newImage)
     return (
         <div>
             <div className={"flex items-center space-x-reverse space-x-4"}>
-                {image?<div className={"relative w-[120px] h-[120px] rounded-[16px] overflow-hidden"}>
+                {image ? <div className={"relative w-[120px] h-[120px] rounded-[16px] overflow-hidden"}>
                     <Image layout={"fill"} src={"/data" + image.url} alt={""}/>
-                </div>:<div className={"flex items-center justify-center rounded-[16px] bg-surface-container-highest-light dark:bg-surface-container-highest-dark w-[120px] h-[120px] "}>
-                <Icon>
-                    image
-                </Icon>
+                </div> : <div
+                    className={"flex items-center justify-center rounded-[16px] bg-surface-container-highest-light dark:bg-surface-container-highest-dark w-[120px] h-[120px] "}>
+                    <Icon>
+                        image
+                    </Icon>
                 </div>}
                 <input hidden name={"thumbnail"} value={JSON.stringify(image)}/>
                 <div>

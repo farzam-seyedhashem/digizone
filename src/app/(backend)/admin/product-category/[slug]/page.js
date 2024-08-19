@@ -55,7 +55,7 @@ export default async function Page({params}) {
             <div className={"container pt-6 mx-auto"}>
                 <div className="px-6 py-6 bg-surface-container-high-light w-full rounded-[24px]">
                     <h1 className="text-title-large font-bold ">
-                        افزودن اسلاید جدید
+ویرایش دسته بندی محصول
                     </h1>
                     <form method={"post"} action={createInvoice} className={"mt-4 gap-4 grid grid-cols-12 "}>
                        <input type="hidden" value={category._id} name={"id"}/>
