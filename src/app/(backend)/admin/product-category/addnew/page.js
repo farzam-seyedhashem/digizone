@@ -20,9 +20,13 @@ export default async function Page() {
         const rawFormData = {
             title: formData.get('title'),
             slug: formData.get('slug'),
-            topCategory: formData.get('top-category'),
             content: formData.get('content'),
             thumbnail: image.id
+        }
+        if (formData.get('top-category')){
+            rawFormData.topCategory = formData.get('top-category')
+        }else{
+            rawFormData.topCategory = null
         }
         await store(rawFormData)
         // revalidateTag("sliderSlides")
