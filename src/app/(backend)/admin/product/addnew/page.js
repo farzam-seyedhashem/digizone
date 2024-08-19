@@ -9,6 +9,10 @@ import Specification from "@admin/product/Specification";
 import {spec} from "node:test/reporters";
 import {cache} from "react";
 import Editor from "@admin/Editor";
+import Link from "next/link";
+import IconButton from "@m3/icon_buttons/IconButton";
+import UploadImage from "@admin/UploadImage";
+import UploadMultipleImage from "@admin/UploadMultipleImage";
 
 const getCategories = cache(async () => {
     'use server'
@@ -32,6 +36,8 @@ export default async function Page() {
         const rawFormData = {
             title: formData.get('title'),
             slug: formData.get('slug'),
+            thumbnail: JSON.parse(formData.get("thumbnail")),
+            images: JSON.parse(formData.get("imagesUploaded")),
             category: formData.get('category'),
             spec: specs,
             price: formData.get('price'),
@@ -50,36 +56,102 @@ export default async function Page() {
 
 
     return (
-        <div className={" bg-surface-light h-screen  w-full"}>
-            <div className={"container pt-6 mx-auto"}>
-                <div className="px-6 py-6 bg-surface-container-high-light w-full rounded-[24px]">
-                    <h1 className="text-title-large font-bold ">
-                        افزودن مقاله
+        <div>
+            <form action={createInvoice} method="POST">
+
+                <div
+                    className={"w-full items-center px-2 h-[64px] flex border-b border-outline-light dark:border-outline-dark "}>
+                    <Link href={"/admin/product"}>
+                        <IconButton className={""}>
+                            arrow_forward
+                        </IconButton>
+                    </Link>
+                    <h1 className="mr-2 flex-1 text-title-medium font-black">
+                        اضافه کردن محصول
                     </h1>
-                    <form action={createInvoice} className={"mt-4 gap-4 grid grid-cols-12 "}>
-                        <input required name={'title'} placeholder={"عنوان محصول"}
-                               className={"col-span-4 text-on-surface-light border border-outline-light rounded-[8px] "}/>
-                        <input required name={'slug'} placeholder={"slug"}
-                               className={"col-span-4 text-on-surface-light border border-outline-light rounded-[8px] "}/>
-                        <input required name={'price'} placeholder={"قیمت"}
-                               className={"col-span-4 text-on-surface-light border border-outline-light rounded-[8px] "}/>
 
-                        <div className={"col-span-8"}>
-                            <Specification categories={categories}/>
-                        </div>
-                        <div className={"col-span-12"}>
-                            <Editor name={"content"}/>
-                        </div>
-
-                        <div className={"flex col-span-12 justify-end"}>
-                            <Button type={"submit"} icon={"save"} variant={"filled"}>
-                                ذخیره
-                            </Button>
-                        </div>
-                    </form>
-
+                    <Button type={"submit"} icon={"save"} variant={"filled"}>
+                        ذخیره
+                    </Button>
                 </div>
-            </div>
+
+
+                <div className={"px-6 pt-6 mx-auto"}>
+                    <div className="  w-full rounded-[24px]">
+
+                        <div className={" grid grid-cols-12 "}>
+                            <div className={"grid grid-cols-12 gap-4 col-span-12"}>
+                                <div className={"col-span-4"}>
+                                    <label className={'text-on-surface-light font-bold mb-1 text-title-small block'}>
+                                        عنوان محصول
+                                    </label>
+                                    <input required name={'title'}
+                                           placeholder={"عنوان محصول"}
+                                           className={"w-full text-on-surface-light border border-outline-light dark:border-outline-dark bg-transparent rounded-[8px] "}/>
+                                </div>
+                                <div className={"col-span-4"}>
+                                    <label className={'text-on-surface-light font-bold mb-1 text-title-small block'}>
+                                        عنوان محصول
+                                    </label>
+                                    <input required name={'slug'} placeholder={"slug"}
+                                           className={"w-full text-on-surface-light border border-outline-light bg-transparent rounded-[8px] "}/>
+                                </div>
+                                <div className={"col-span-4"}>
+                                    <label className={'text-on-surface-light font-bold mb-1 text-title-small block'}>
+                                        قیمت محصول
+                                    </label>
+                                    <input required name={'price'} placeholder={"قیمت"}
+                                           className={"w-full text-on-surface-light border border-outline-light bg-transparent rounded-[8px] "}/>
+                                </div>
+                            </div>
+                            <div className={"pt-6 mb-4 col-span-4"}>
+                                <UploadImage name={"file"} label={"بارگذاری عکس اصلی"}/>
+                            </div>
+                            <div className={"pb-6 col-span-12"}>
+                                <UploadMultipleImage name={"images"} label={"بارگذاری عکس اصلی"}/>
+                            </div>
+
+                            <div className={"col-span-12"}>
+                                <h3 className="text-on-surface-light dark:text-on-surface-dark font-black text-title-small ">
+                                    انتخاب دسته بندی و مشخصات محصول
+                                </h3>
+                                <p className={"mb-3 max-w-5xl text-on-surface-variant-light text-body-large"}>
+                                    در پایین دسته بندی محصول را انتخاب نمایید بر اساس آن ویژگی های آن دسته بندی نمایش
+                                    داده
+                                    میشود و میتوانید ویژگی های محصول مانند نوع cpu و یا اندازه رم را انتخاب نمایید.
+                                    اگر هنوز ویژگی های محصولات و یا دسته بنده ها را وارد نکرده اید ابتدا به بخش مربوط به
+                                    <Link href={"/admin/product-category"}
+                                          className={'font-medium text-primary-light mx-1 hover:underline'}>
+                                        دسته بندی محصول
+                                    </Link>
+                                    و یا
+                                    <Link href={"/admin/product-spec"}
+                                          className={'font-medium text-primary-light mx-1 hover:underline'}>
+                                        مشخصات محصولات
+                                    </Link>
+                                    بروید و سپس محصول جدید اضافه کنید
+                                </p>
+                                <Specification categories={categories}/>
+                            </div>
+                            <div
+                                className={"col-span-12 my-10 h-[1px] bg-outline-variant-light w-full mx-auto"}/>
+                            <div className={"col-span-12"}>
+                                <div>
+                                    <h3 className="text-on-surface-light dark:text-on-surface-dark font-black text-title-small ">
+                                        توضیحات محصول
+                                    </h3>
+                                    <p className={"mb-4 max-w-5xl text-on-surface-variant-light text-body-large"}>
+                                        شما میتوانید توضیحات محصولات خود را در این قسمت وارد نمایید.
+                                    </p>
+                                </div>
+                                <Editor name={"content"}/>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </form>
         </div>
     )
 }
