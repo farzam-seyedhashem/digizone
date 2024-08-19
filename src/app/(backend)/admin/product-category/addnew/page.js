@@ -65,7 +65,7 @@ export default async function Page() {
                             </label>
                             <select name={"top-category"} dir={"rtl"}
                                     className={"rounded-full col-span-4"}>
-                                <option>-</option>
+                                <option label={"-"} value={null}></option>
                                 {data.map(item => <option key={item.id} label={item.title} value={item.id}/>)}
                             </select>
                         </div>
