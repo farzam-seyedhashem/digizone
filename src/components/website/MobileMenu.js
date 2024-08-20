@@ -36,7 +36,7 @@ export default function MobileMenu() {
         }
     ]
     return (
-        <div className={"fixed bottom-0 left-0 w-full z-999"}>
+        <div className={"md:hidden fixed bottom-0 left-0 w-full z-999"}>
             <div
                 className={"w-full pt-3 pb-4 bg-surface-container-light dark:bg-surface-container-dark h-[80px] shadow-elevated-two-light dark:shadow-elevated-two-light flex items-center justify-center"}>
                 <ul className={"flex  w-full items-center *:w-3/12 space-x-reverse space-x-2"}>
